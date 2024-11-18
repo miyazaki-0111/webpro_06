@@ -37,7 +37,6 @@ app.get("/janken", (req, res) => {
   if( num==1 ) cpu = 'グー';
   else if( num==2 ) cpu = 'チョキ';
   else cpu = 'パー';
-  // ここに勝敗の判定を入れる
 
 let judgement = '';
 if ((hand === 'グー' && cpu === 'チョキ') ||
@@ -60,6 +59,139 @@ total += 1;
     total: total
   }
   res.render( 'janken', display );
+});
+
+app.get("/janken", (req, res) => {
+  let hand = req.query.hand;
+  let win = Number( req.query.win );
+  let total = Number( req.query.total );
+  console.log( {hand, win, total});
+  const num = Math.floor( Math.random() * 3 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = 'グー';
+  else if( num==2 ) cpu = 'チョキ';
+  else cpu = 'パー';
+
+let judgement = '';
+if ((hand === 'グー' && cpu === 'チョキ') ||
+    (hand === 'チョキ' && cpu === 'パー') ||
+    (hand === 'パー' && cpu === 'グー')) {
+    judgement = '勝ち';
+    win += 1;
+} else if (hand === cpu) {
+    judgement = 'あいこ';
+} else {
+    judgement = '負け';
+}
+total += 1;
+
+  const display = {
+    your: hand,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'janken', display );
+
+});
+app.get("/janken", (req, res) => {
+  let hand = req.query.hand;
+  let win = Number( req.query.win );
+  let total = Number( req.query.total );
+  console.log( {hand, win, total});
+  const num = Math.floor( Math.random() * 3 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = 'グー';
+  else if( num==2 ) cpu = 'チョキ';
+  else cpu = 'パー';
+
+let judgement = '';
+if ((hand === 'グー' && cpu === 'チョキ') ||
+    (hand === 'チョキ' && cpu === 'パー') ||
+    (hand === 'パー' && cpu === 'グー')) {
+    judgement = '勝ち';
+    win += 1;
+} else if (hand === cpu) {
+    judgement = 'あいこ';
+} else {
+    judgement = '負け';
+}
+total += 1;
+
+  const display = {
+    your: hand,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'janken', display );
+});
+
+app.get("/aisyou", (req, res) => {
+  let zokusei = req.query.zokusei;
+  let win = Number( req.query.win );
+  let total = Number( req.query.total );
+  console.log( {zokusei, win, total});
+  const num = Math.floor( Math.random() * 3 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = '炎';
+  else if( num==2 ) cpu = '森';
+  else cpu = '水';
+
+let judgement = '';
+if ((zokusei === '炎' && cpu === '森') ||
+    (zokusei === '森' && cpu === '水') ||
+    (zokusei === '水' && cpu === '炎')) {
+    judgement = '勝ち';
+    win += 1;
+} else if (zokusei === cpu) {
+    judgement = 'あいこ';
+} else {
+    judgement = '負け';
+}
+total += 1;
+
+  const display = {
+    your: zokusei,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'aisyou', display );
+});
+
+app.get("/seisi", (req, res) => {
+  let hand = req.query.hand;
+  let win = Number( req.query.win );
+  let total = Number( req.query.total );
+  console.log( {hand, win, total});
+  const num = Math.floor( Math.random() * 2 + 1 );
+  let cpu = '';
+  if( num==1 ) cpu = '王様';
+  else cpu = '奴隷';
+
+let judgement = '';
+if (hand === '奴隷' && cpu === '王様' ){
+    judgement = '勝ち';
+    win += 1;
+} else if (hand === cpu) {
+    judgement = 'あいこ';
+} else {
+    judgement = '負け';
+}
+total += 1;
+
+  const display = {
+    your: hand,
+    cpu: cpu,
+    judgement: judgement,
+    win: win,
+    total: total
+  }
+  res.render( 'seisi', display );
 });
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));

@@ -95,6 +95,9 @@ total += 1;
   res.render( 'janken', display );
 
 });
+
+app.set('view engine', 'ejs');
+app.use("/public", express.static(__dirname + "/public"));
 app.get("/janken", (req, res) => {
   let hand = req.query.hand;
   let win = Number( req.query.win );

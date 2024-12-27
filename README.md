@@ -32,6 +32,23 @@ app5.jsと同じディレクトリで以下のコマンドを実行して，Git�
 ```bash
 git init
 ```
+次にaddコマンドで変更を一時保存
+```bash
+git add .
+```
+
+2. **commitでディレクトリの変更を登録**
+
+git commitでディレクトリの変更をローカルリポジトリに登録する．
+```bash
+git commit -m '変更済み'
+```
+
+3. **pushする**
+```bush
+git push origin master
+```
+このコマンドで，githubに変更後のコードをpushする．
 
 
    

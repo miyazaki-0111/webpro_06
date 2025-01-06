@@ -68,6 +68,5 @@ git push origin master
 ```
 このコマンドで，githubに変更後のコードをpushする．
 
-/
    
 

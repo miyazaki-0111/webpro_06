@@ -6,17 +6,16 @@
     <title>eゲームです</title>
 </head>
 <body>
-    <p>あなたの役職は<%= your %>で,</p>
-    <p>cpuの役職は<%= cpu %>です．</p>
+    <p>あなたの数字は<%= your %>で,</p>
+    <p>cpuの数字は<%= cpu %>です．</p>
     <p>判定：<%= judgement %></p>
-    <p>現在<%= total %>試合中<%= win %>勝しています．</p>
     <hr>
     <form action="/seisi">
         <input type="text" name="hand" required>
-        <label for="hand">あなたは何を出す？</label>
+        <label for="hand">1を入力して勝負開始！！</label>
         <input type="hidden" name="win" value="<%= win %>">
         <input type="hidden" name="total" value="<%= total %>">
-        <input type="submit" values="eゲームです">
+        <input type="submit" values="数字でゲームです">
     </form>   
 </body>
 </html>

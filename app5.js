@@ -131,68 +131,66 @@ total += 1;
 });
 
 app.get("/aisyou", (req, res) => {
-  let zokusei = req.query.zokusei;
-  let win = Number( req.query.win );
-  let total = Number( req.query.total );
-  console.log( {zokusei, win, total});
-  const num = Math.floor( Math.random() * 3 + 1 );
-  let cpu = '';
-  if( num==1 ) cpu = '炎';
-  else if( num==2 ) cpu = '森';
-  else cpu = '水';
+  let trait = req.query.trait; // プレイヤーの性格や特性
+  let win = Number(req.query.win);
+  let total = Number(req.query.total);
+  console.log({ trait, win, total });
 
-let judgement = '';
-if ((zokusei === '炎' && cpu === '森') ||
-    (zokusei === '森' && cpu === '水') ||
-    (zokusei === '水' && cpu === '炎')) {
-    judgement = '勝ち';
+  const traits = ['優しさ', '勇気', '知性'];
+  const cpuTrait = traits[Math.floor(Math.random() * traits.length)];
+
+  let judgement = '';
+  if ((trait === '優しさ' && cpuTrait === '勇気') ||
+      (trait === '勇気' && cpuTrait === '知性') ||
+      (trait === '知性' && cpuTrait === '優しさ')) {
+    judgement = '相性良い';
     win += 1;
-} else if (zokusei === cpu) {
-    judgement = 'あいこ';
-} else {
-    judgement = '負け';
-}
-total += 1;
+  } else if (trait === cpuTrait) {
+    judgement = '普通';
+  } else {
+    judgement = '相性悪い';
+  }
+  total += 1;
 
   const display = {
-    your: zokusei,
-    cpu: cpu,
+    your: trait,
+    cpu: cpuTrait,
     judgement: judgement,
     win: win,
     total: total
-  }
-  res.render( 'aisyou', display );
+  };
+  res.render('aisyou', display);
 });
 
 app.get("/seisi", (req, res) => {
-  let hand = req.query.hand;
-  let win = Number( req.query.win );
-  let total = Number( req.query.total );
-  console.log( {hand, win, total});
-  const num = Math.floor( Math.random() * 2 + 1 );
-  let cpu = '';
-  if( num==1 ) cpu = '王様';
-  else cpu = '奴隷';
+  const playerNumber = Math.floor(Math.random() * 100) + 1; // プレイヤーの数字をランダムに生成
+  const cpuNumber = Math.floor(Math.random() * 100) + 1;    // CPUの数字もランダムに生成
 
-let judgement = '';
-if (hand === '奴隷' && cpu === '王様' ){
+  let win = Number(req.query.win);
+  let total = Number(req.query.total);
+  console.log({ playerNumber, cpuNumber, win, total });
+
+  let judgement = '';
+  if (playerNumber > cpuNumber) {
     judgement = '勝ち';
     win += 1;
-} else if (hand === cpu) {
+  } else if (playerNumber === cpuNumber) {
     judgement = 'あいこ';
-} else {
+  } else {
     judgement = '負け';
-}
-total += 1;
+  }
+  total += 1;
 
   const display = {
-    your: hand,
-    cpu: cpu,
+    your: playerNumber,
+    cpu: cpuNumber,
     judgement: judgement,
     win: win,
     total: total
-  }
-  res.render( 'seisi', display );
+  };
+
+  res.render('seisi', display);
 });
+
 
 app.listen(8080, () => console.log("Example app listening on port 8080!"));
